@@ -1,0 +1,12 @@
+{
+  "name": "ApexFlow",
+  "description": "Next-generation collaborative project management platform with real-time sprint boards, Discord-style voice and text channels, GitHub repo integration, and live presence.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "display-capture"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public profile details for a registered workspace user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "role": { "type": "string", "maxLength": 40 },
+        "githubUsername": { "type": "string", "maxLength": 80 },
+        "bio": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "Workspace": {
+      "title": "Workspace",
+      "description": "High level workspace container.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 50 },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "ownerId"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Agile project containing boards, sprints, issues, and channels.",
+      "type": "object",
+      "properties": {
+        "workspaceId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "key": { "type": "string", "maxLength": 10 },
+        "description": { "type": "string", "maxLength": 500 },
+        "leadId": { "type": "string", "maxLength": 128 },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "key", "ownerId"]
+    },
+    "Issue": {
+      "title": "Issue / Task",
+      "description": "Agile issue, bug, story or epic.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "key": { "type": "string", "maxLength": 20 },
+        "sprintId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "status": { "type": "string", "maxLength": 30 },
+        "priority": { "type": "string", "maxLength": 20 },
+        "type": { "type": "string", "maxLength": 20 },
+        "reporterId": { "type": "string", "maxLength": 128 },
+        "assigneeId": { "type": "string", "maxLength": 128 },
+        "storyPoints": { "type": "number" },
+        "dueDate": { "type": "string", "maxLength": 50 },
+        "branchName": { "type": "string", "maxLength": 100 },
+        "prNumber": { "type": "number" },
+        "prUrl": { "type": "string", "maxLength": 300 },
+        "prStatus": { "type": "string", "maxLength": 50 },
+        "repoName": { "type": "string", "maxLength": 150 },
+        "forkName": { "type": "string", "maxLength": 150 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["projectId", "title", "status", "priority", "type"]
+    },
+    "Sprint": {
+      "title": "Sprint",
+      "description": "Agile time-boxed sprint.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "goal": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "maxLength": 20 },
+        "startDate": { "type": "string", "maxLength": 50 },
+        "endDate": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["projectId", "name", "status"]
+    },
+    "Comment": {
+      "title": "Task Comment",
+      "description": "Discussion item on an issue.",
+      "type": "object",
+      "properties": {
+        "issueId": { "type": "string", "maxLength": 128 },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 100 },
+        "authorPhotoURL": { "type": "string", "maxLength": 500 },
+        "content": { "type": "string", "maxLength": 3000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["issueId", "authorId", "content"]
+    },
+    "Channel": {
+      "title": "Channel",
+      "description": "Text or voice collaboration room.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 50 },
+        "type": { "type": "string", "maxLength": 20 },
+        "topic": { "type": "string", "maxLength": 200 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["projectId", "name", "type"]
+    },
+    "Message": {
+      "title": "Channel Message",
+      "description": "Real-time communication message inside text channels.",
+      "type": "object",
+      "properties": {
+        "channelId": { "type": "string", "maxLength": 128 },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 100 },
+        "authorPhotoURL": { "type": "string", "maxLength": 500 },
+        "content": { "type": "string", "maxLength": 4000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["channelId", "authorId", "content"]
+    },
+    "Presence": {
+      "title": "User Presence",
+      "description": "Real-time presence, heartbeat, and current status.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "status": { "type": "string", "maxLength": 20 },
+        "lastSeen": { "type": "string" },
+        "currentActivity": { "type": "string", "maxLength": 150 },
+        "currentProjectId": { "type": "string", "maxLength": 128 },
+        "currentIssueId": { "type": "string", "maxLength": 128 },
+        "currentVoiceChannelId": { "type": "string", "maxLength": 128 },
+        "isMuted": { "type": "boolean" },
+        "isDeafened": { "type": "boolean" },
+        "isCameraOn": { "type": "boolean" },
+        "isScreenSharing": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "status"]
+    },
+    "Activity": {
+      "title": "Activity Feed Item",
+      "description": "Historical and real-time audit log event.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 100 },
+        "userAvatar": { "type": "string", "maxLength": 500 },
+        "type": { "type": "string", "maxLength": 50 },
+        "message": { "type": "string", "maxLength": 300 },
+        "issueKey": { "type": "string", "maxLength": 20 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["projectId", "type", "message"]
+    },
+    "GitHubConnection": {
+      "title": "GitHub Repository Connection",
+      "description": "Associated GitHub repo for a project.",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "repoName": { "type": "string", "maxLength": 100 },
+        "repoOwner": { "type": "string", "maxLength": 100 },
+        "defaultBranch": { "type": "string", "maxLength": 50 },
+        "connectedAt": { "type": "string" },
+        "status": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["projectId", "repoName", "repoOwner"]
+    },
+    "GitHubActivity": {
+      "title": "GitHub Event Record",
+      "description": "Normalized GitHub event (commit, push, PR).",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "maxLength": 128 },
+        "repoName": { "type": "string", "maxLength": 100 },
+        "eventType": { "type": "string", "maxLength": 50 },
+        "author": { "type": "string", "maxLength": 100 },
+        "commitSha": { "type": "string", "maxLength": 40 },
+        "commitMessage": { "type": "string", "maxLength": 300 },
+        "prNumber": { "type": "number" },
+        "prTitle": { "type": "string", "maxLength": 200 },
+        "prState": { "type": "string", "maxLength": 30 },
+        "prUrl": { "type": "string", "maxLength": 300 },
+        "branch": { "type": "string", "maxLength": 100 },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["projectId", "repoName", "eventType"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification item.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "message": { "type": "string", "maxLength": 500 },
+        "link": { "type": "string", "maxLength": 300 },
+        "type": { "type": "string", "maxLength": 50 },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "title", "read"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Collection of user profile records."
+    },
+    "/workspaces/{workspaceId}": {
+      "schema": { "$ref": "#/entities/Workspace" },
+      "description": "Collection of workspaces."
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Collection of agile projects."
+    },
+    "/issues/{issueId}": {
+      "schema": { "$ref": "#/entities/Issue" },
+      "description": "Collection of tasks, bugs, and stories."
+    },
+    "/sprints/{sprintId}": {
+      "schema": { "$ref": "#/entities/Sprint" },
+      "description": "Collection of sprints."
+    },
+    "/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" },
+      "description": "Collection of issue comments."
+    },
+    "/channels/{channelId}": {
+      "schema": { "$ref": "#/entities/Channel" },
+      "description": "Collection of Discord-style voice and text channels."
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/Message" },
+      "description": "Collection of channel chat messages."
+    },
+    "/presence/{userId}": {
+      "schema": { "$ref": "#/entities/Presence" },
+      "description": "Collection of user real-time presence indicators."
+    },
+    "/activities/{activityId}": {
+      "schema": { "$ref": "#/entities/Activity" },
+      "description": "Collection of workspace activity events."
+    },
+    "/githubConnections/{connId}": {
+      "schema": { "$ref": "#/entities/GitHubConnection" },
+      "description": "Collection of project GitHub connections."
+    },
+    "/githubActivity/{actId}": {
+      "schema": { "$ref": "#/entities/GitHubActivity" },
+      "description": "Collection of GitHub activity items."
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "Collection of personal notifications."
+    },
+    "/threads/{threadId}": {
+      "description": "Collection of project-scoped discussion and RMMM risk threads."
+    },
+    "/threadMessages/{messageId}": {
+      "description": "Collection of messages belonging to project threads and risk threads."
+    }
+  }
+}

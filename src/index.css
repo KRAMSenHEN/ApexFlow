@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color-scheme: dark;
+    background-color: #0b0f19;
+    color: #f1f5f9;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+
+  p, span, h1, h2, h3, h4, h5, h6, a, div, td, th {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', monospace, sans-serif;
+}
+.font-serif-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+
+/* Speaking Wave Animation */
+@keyframes pulseSpeaking {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.speaking-bar {
+  animation: pulseSpeaking 0.8s ease-in-out infinite;
+}
+
+.speaking-ring {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.6), 0 0 16px rgba(34, 197, 94, 0.4);
+}
+
+/* ========================================================
+   EMBED ANIMATIONS & PRESENTATION TRANSITIONS (PPTX-STYLE)
+   ======================================================== */
+
+@keyframes embedFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes embedSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes embedSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes embedPopScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  70% {
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes embedFlip3D {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(28deg) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) translateY(0);
+  }
+}
+
+@keyframes embedLiquidGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 24px rgba(168, 85, 247, 0.75)) drop-shadow(0 0 40px rgba(59, 130, 246, 0.5));
+  }
+}
+
+@keyframes embedShimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes embedAmbientPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+  50% {
+    box-shadow: 0 0 25px 4px rgba(99, 102, 241, 0.35);
+  }
+}
+
+@keyframes embedAmbientFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes embedGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Speed Classes */
+.speed-fast {
+  animation-duration: 0.35s !important;
+}
+.speed-normal {
+  animation-duration: 0.65s !important;
+}
+.speed-dramatic {
+  animation-duration: 1.25s !important;
+}
+
+/* Entry Transition Classes */
+.embed-trans-fade {
+  animation: embedFadeIn 0.6s ease-out forwards;
+}
+.embed-trans-slide-up {
+  animation: embedSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.embed-trans-slide-down {
+  animation: embedSlideDown 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.embed-trans-pop-scale {
+  animation: embedPopScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.embed-trans-flip-3d {
+  animation: embedFlip3D 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.embed-trans-liquid-glow {
+  animation: embedFadeIn 0.5s ease-out forwards, embedLiquidGlow 3s ease-in-out infinite;
+}
+.embed-trans-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.embed-trans-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  animation: embedShimmerSweep 2.5s infinite;
+  pointer-events: none;
+}
+
+/* Ambient Classes */
+.embed-amb-pulse-glow {
+  animation: embedAmbientPulse 3s ease-in-out infinite;
+}
+.embed-amb-float {
+  animation: embedAmbientFloat 3.5s ease-in-out infinite;
+}
+.embed-amb-gradient-shift {
+  background-size: 200% 200% !important;
+  animation: embedGradientShift 6s ease infinite;
+}
